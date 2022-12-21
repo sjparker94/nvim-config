@@ -1,4 +1,5 @@
---
+vim.g.mapleader = " "
+
 -- vim.opt.guicursor = ""
 
 -- line numbers
@@ -16,9 +17,19 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 
 -- search settings
-vim.opt.ignorecase = true
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+vim.opt.ignorecase = false
 vim.opt.smartcase = true
 
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
+vim.opt.scrolloff = 8
+
+vim.opt.colorcolumn = "120"
 -- appearance
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
@@ -27,4 +38,3 @@ vim.opt.signcolumn = "yes"
 -- split windows
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-
