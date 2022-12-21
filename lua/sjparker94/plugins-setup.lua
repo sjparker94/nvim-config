@@ -94,6 +94,20 @@ return packer.startup(function(use)
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
+	-- treesitter
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+
+	-- auto closing
+	-- use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
+	-- use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
+
+	-- git integration
+	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+
+	use("theprimeagen/harpoon")
+	use("mbbill/undotree")
+	use("tpope/vim-fugitive")
+
 	-- telescope
 	if packer_bootstrap then
 		require("packer").sync()
