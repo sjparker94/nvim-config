@@ -31,6 +31,10 @@ local builtin = require("telescope.builtin")
 
 -- telescope find commands
 keymap.set("n", "<leader>ff", builtin.find_files, {}) -- find files within current working directory, respects .gitignore
+keymap.set("n", "<leader>fd", function()
+	builtin.find_files({ hidden = true, no_ignore = true })
+end, {}) -- find files within current working directory, including hidden files
+vim.keymap.set("n", "<leader>gc", ":Telescope <CR>")
 keymap.set("n", "<leader>fg", builtin.live_grep, {}) -- findstring in the current working directory as you type
 keymap.set("n", "<leader>fc", builtin.grep_string, {}) -- find string under cursor in current working directory
 keymap.set("n", "<leader>fb", builtin.buffers, {}) -- list open buffers in current neovim instance
