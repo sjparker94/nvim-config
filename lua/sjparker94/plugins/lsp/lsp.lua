@@ -27,6 +27,7 @@ mason_null_ls.setup({
 	},
 	-- auto-install configured formatters & linters (with null-ls)
 	automatic_installation = true,
+	sources = sources,
 })
 
 lsp.preset("recommended")
