@@ -38,3 +38,5 @@ vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 
 -- restart lsp server (not on youtube nvim video)
 vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+
+vim.keymap.set("n", "<leader>xe", ":lua vim.diagnostic.open_float(0, {scope='line'})<CR>")

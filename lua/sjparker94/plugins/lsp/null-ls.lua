@@ -7,6 +7,7 @@ local status, prettier = pcall(require, "prettier")
 if not status then
 	return
 end
+-- local code_actions = require("null-ls.code_actions")
 
 prettier.setup({
 	bin = "prettierd",
@@ -21,12 +22,13 @@ prettier.setup({
 		"less",
 	},
 })
+
 -- for conciseness
 local formatting = null_ls.builtins.formatting -- to setup formatters
 local diagnostics = null_ls.builtins.diagnostics -- to setup linters
+local code_actions = null_ls.builtins.code_actions
 
 -- to setup format on save
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 -- configure null_ls
 null_ls.setup({
@@ -46,6 +48,7 @@ null_ls.setup({
 			-- 	return utils.root_has_file(".eslintrc.js")
 			-- end,
 		}),
+		code_actions.eslint_d,
 	},
 	-- configure format on save
 	on_attach = function(current_client, bufnr)
