@@ -29,9 +29,9 @@ vim.keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width & 
 vim.keymap.set("n", "<leader>sx", ":close<CR>") -- close current split window
 
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
-vim.keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
-vim.keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
-vim.keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
+vim.keymap.set("n", "<leader>tx", ":BufferClose<CR>") -- close current tab
+vim.keymap.set("n", "<leader>tn", ":BufferNext<CR>") --  go to next tab
+vim.keymap.set("n", "<leader>tp", ":BufferPrevious<CR>") --  go to previous tab
 
 -- nvim-tree
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
@@ -40,3 +40,44 @@ vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
 vim.keymap.set("n", "<leader>xe", ":lua vim.diagnostic.open_float(0, {scope='line'})<CR>")
+
+vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>")
+vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>")
+vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>")
+vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>")
+
+-- barbar - tabs
+local opts = { noremap = true, silent = true }
+
+local map = vim.api.nvim_set_keymap
+
+map("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
+map("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
+
+-- Re-order to previous/next
+map("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
+map("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
+
+-- Goto buffer in position...
+map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
+map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
+map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
+map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
+map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
+map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
+map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
+map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
+map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
+map("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
+
+-- Pin/unpin buffer
+map("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
+
+-- Close buffer
+map("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
+
+-- Sort automatically by...
+map("n", "<leader>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
+map("n", "<leader>bd", "<Cmd>BufferOrderByDirectory<CR>", opts)
+map("n", "<leader>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
+map("n", "<leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
