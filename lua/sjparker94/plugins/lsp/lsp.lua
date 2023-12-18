@@ -27,7 +27,7 @@ mason_null_ls.setup({
 	},
 	-- auto-install configured formatters & linters (with null-ls)
 	automatic_installation = true,
-	sources = sources,
+	-- sources = sources,
 })
 
 lsp.preset("recommended")
@@ -37,7 +37,7 @@ lsp.ensure_installed({
 	"html",
 	"cssls",
 	"tailwindcss",
-	"sumneko_lua",
+	"lua_ls",
 	"emmet_ls",
 })
 
@@ -80,8 +80,7 @@ lsp.setup_nvim_cmp({
 		}),
 	},
 })
-
-lsp.configure("sumneko_lua", {
+lsp.configure("lua_ls", {
 	settings = {
 		Lua = {
 			diagnostics = {
