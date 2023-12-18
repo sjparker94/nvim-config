@@ -33,9 +33,9 @@ return packer.startup(function(use)
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	-- use("morhetz/gruvbox")
+	use("morhetz/gruvbox")
 	-- use("folke/tokyonight.nvim")
-	use("joshdick/onedark.vim")
+	-- use("joshdick/onedark.vim")
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 
@@ -98,6 +98,9 @@ return packer.startup(function(use)
 	-- treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
+	-- use("SirVer/ultisnips")
+	-- use("mlaursen/vim-react-snippets")
+
 	-- error
 	use({
 		"folke/trouble.nvim",
@@ -121,6 +124,8 @@ return packer.startup(function(use)
 	use("theprimeagen/harpoon")
 	use("mbbill/undotree")
 	use("tpope/vim-fugitive")
+
+	use("romgrk/barbar.nvim")
 
 	-- telescope
 	if packer_bootstrap then
