@@ -1,24 +1,15 @@
--- import lualine plugin safely
-local status, lualine = pcall(require, "lualine")
-if not status then
-	return
-end
+return {
+	"nvim-lualine/lualine.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	config = function()
+		local lualine = require("lualine")
+		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
-local lualine_theme = require("lualine.themes.gruvbox")
-
--- change nightlfy theme colors
--- lualine_nightfly.normal.a.bg = new_colors.blue
--- lualine_nightfly.insert.a.bg = new_colors.green
--- lualine_nightfly.visual.a.bg = new_colors.violet
-lualine_theme.command = {
-	a = {
-		gui = "bold",
-	},
+		-- configure lualine with modified theme
+		lualine.setup({
+			options = {
+				theme = "gruvbox",
+			},
+		})
+	end,
 }
-
--- configure lualine with modified theme
-lualine.setup({
-	options = {
-		theme = "gruvbox",
-	},
-})

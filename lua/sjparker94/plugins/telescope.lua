@@ -1,47 +1,51 @@
--- import telescope plugin safely
-local telescope_setup, telescope = pcall(require, "telescope")
-if not telescope_setup then
-	return
-end
-
--- import telescope actions safely
-local actions_setup, actions = pcall(require, "telescope.actions")
-if not actions_setup then
-	return
-end
-
--- configure telescope
-telescope.setup({
-	-- configure custom mappings
-	defaults = {
-		mappings = {
-			i = {
-				["<C-k>"] = actions.move_selection_previous, -- move to prev result
-				["<C-j>"] = actions.move_selection_next, -- move to next result
-				["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
-			},
-		},
+return {
+	"nvim-telescope/telescope.nvim",
+	branch = "0.1.x",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		"nvim-tree/nvim-web-devicons",
+		"debugloop/telescope-undo.nvim",
 	},
-})
+	config = function()
+		local telescope = require("telescope")
+		local actions = require("telescope.actions")
 
-telescope.load_extension("fzf")
+		telescope.setup({
+			defaults = {
+				path_display = { "truncate " },
+				mappings = {
+					i = {
+						["<C-k>"] = actions.move_selection_previous, -- move to prev result
+						["<C-j>"] = actions.move_selection_next, -- move to next result
+						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+					},
+				},
+			},
+			extensions = {
+				undo = {},
+			},
+		})
 
-local keymap = vim.keymap
-local builtin = require("telescope.builtin")
+		telescope.load_extension("fzf")
+		telescope.load_extension("undo")
 
--- telescope find commands
-keymap.set("n", "<leader>ff", builtin.find_files, {}) -- find files within current working directory, respects .gitignore
-keymap.set("n", "<leader>fd", function()
-	builtin.find_files({ hidden = true, no_ignore = true })
-end, {}) -- find files within current working directory, including hidden files
-vim.keymap.set("n", "<leader>gc", ":Telescope <CR>")
-keymap.set("n", "<leader>fg", builtin.live_grep, {}) -- findstring in the current working directory as you type
-keymap.set("n", "<leader>fc", builtin.grep_string, {}) -- find string under cursor in current working directory
-keymap.set("n", "<leader>fb", builtin.buffers, {}) -- list open buffers in current neovim instance
-keymap.set("n", "<leader>fh", builtin.help_tags, {}) -- list available help tags
+		-- set keymaps
+		local keymap = vim.keymap -- for conciseness
+		local builtin = require("telescope.builtin")
 
--- telescope git commands
--- keymap.set("n", "<leader>gc", builtin.git_commits, {}) -- list all git commits (use <cr> to checkout) ["gc" for git commits]
--- keymap.set("n", "<leader>gfc", builtin.git_bcommits, {}) -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
--- keymap.set("n", "<leader>gb", builtin.git_branches, {}) -- list git branches (use <cr> to checkout) ["gb" for git branch]
--- keymap.set("n", "<leader>gs", builtin.git_status, {}) -- list current changes per file with diff preview ["gs" for git status]
+		-- telescope find commands
+		keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" }) -- find files within current working directory, respects .gitignore
+		keymap.set("n", "<leader>fd", function()
+			builtin.find_files({ hidden = true, no_ignore = true })
+		end, { desc = "Fuzzy find files including hidden files e.g. .env/node_modules" }) -- find files within current working directory, including hidden files
+		keymap.set("n", "<leader>gc", ":Telescope <CR>")
+		keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find string in cwd" }) -- findstring in the current working directory as you type
+		keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Fuzzy find recent files" })
+		keymap.set("n", "<leader>fc", builtin.grep_string, { desc = "Find string under cursor in cwd" }) -- find string under cursor in current working directory
+		keymap.set("n", "<leader>fb", builtin.buffers, { desc = "List open buffers in current neovim instance" }) -- list open buffers in current neovim instance
+		keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "List available help tags" }) -- list available help tags
+
+		keymap.set("n", "<leader>u", "<cmd>Telescope undo<CR>", { desc = "Telescope undo" }) -- list available help tags
+	end,
+}
