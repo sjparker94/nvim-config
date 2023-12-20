@@ -81,3 +81,7 @@ map("n", "<leader>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
 map("n", "<leader>bd", "<Cmd>BufferOrderByDirectory<CR>", opts)
 map("n", "<leader>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
 map("n", "<leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
+
+-- git
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "<leader>gC", ":Git commit<CR>")
