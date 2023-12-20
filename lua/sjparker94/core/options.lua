@@ -30,6 +30,7 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 8
 
 vim.opt.colorcolumn = "80"
+
 -- appearance
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
