@@ -36,6 +36,7 @@ return {
 				"graphql",
 				"emmet_ls",
 				"prismals",
+				"gopls",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
